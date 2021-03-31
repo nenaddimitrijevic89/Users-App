@@ -22,7 +22,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-, "pages/_app.js", "pages/users/[user].js", "src/components/Users"  ],
+, "pages/_app.js", "pages/users/[user].js", "src/components/Users", "pages/createuser.js"  ],
   "exclude": [
     "node_modules"
   ]

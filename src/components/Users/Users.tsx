@@ -4,7 +4,7 @@ import { Td, Tr } from "@chakra-ui/table";
 import { Person } from "../../../api/Person";
 
 const Users = () => {
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState([] as Person[]);
 
   useEffect(() => {
     const load = async () => {

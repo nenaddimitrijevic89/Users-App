@@ -1,11 +1,8 @@
-import React from 'react';
-import UserPage from '../../src/pages/UserPage/UserPage';
+import React from "react";
+import UserPage from "../../src/pages/UserPage/UserPage";
 
 const UserContainer = () => {
-    
-    return (
-        <UserPage/>
-    )
-}
+  return <UserPage />;
+};
 
 export default UserContainer;

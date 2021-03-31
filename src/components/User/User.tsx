@@ -2,11 +2,28 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { Person } from "../../../api/Person";
 import { Table, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/table";
+import { Container } from "@chakra-ui/layout";
+import { Button } from "@chakra-ui/button";
+import { useToast } from "@chakra-ui/react";
+import { successDelete } from "../../../shared/utilities";
 
 const User = () => {
   const [user, setUser] = useState({} as Person);
   const router = useRouter();
   const id = router.query.user;
+  const toast = useToast();
+
+  const deleteUser = () => {
+    fetch(`https://jsonplaceholder.typicode.com/users/${id}`, {
+      method: 'DELETE',
+    })
+    .then(response => {
+      if(response.status === 200){
+        toast(successDelete as {});
+        router.push("/users");
+      }
+    })
+  }
 
   useEffect(() => {
     const auth = localStorage.getItem("email");
@@ -18,14 +35,13 @@ const User = () => {
         `https://jsonplaceholder.typicode.com/users/${id}`
       );
       const fetchedUser = await response.json();
-      console.log(fetchedUser);
       setUser(fetchedUser);
     };
     load();
   }, [id]);
 
   return (
-    <>
+    <Container maxW="container.xl">
       <Table variant="simple">
         <Thead>
           <Tr>
@@ -52,7 +68,9 @@ const User = () => {
           </Tr>
         </Tbody>
       </Table>
-    </>
+      <Button margin="15px">Edit</Button>
+      <Button margin="15px" onClick={() => deleteUser()}>Delete</Button>
+    </Container>
   );
 };
 

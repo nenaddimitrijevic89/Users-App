@@ -1,10 +1,8 @@
-import React from 'react';
-import User from '../../components/User/User';
+import React from "react";
+import User from "../../components/User/User";
 
 const UserPage = () => {
-    return (
-        <User />
-    )
-}
+  return <User />;
+};
 
 export default UserPage;
