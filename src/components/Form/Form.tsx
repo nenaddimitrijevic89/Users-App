@@ -22,7 +22,6 @@ const Form = () => {
   };
 
   const set = (email: string) => {
-    console.log(email);
     setEmail(email);
   };
   return (

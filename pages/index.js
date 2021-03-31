@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import Router from 'next/router';
 
-const Home = () => {
+const IndexContainer = () => {
   useEffect(() => {
     const { pathname } = Router;
     if(pathname == '/' ){
@@ -13,4 +13,4 @@ const Home = () => {
   )
 }
 
-export default Home;
+export default IndexContainer;

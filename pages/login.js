@@ -1,10 +1,10 @@
 import React from 'react';
 import LoginPage from '../src/pages/LoginPage/LoginPage.tsx';
 
-const Login = () => {
+const LoginContainer = () => {
   return (
     <LoginPage />
   );
 };
 
-export default Login;
+export default LoginContainer;

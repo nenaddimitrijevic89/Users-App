@@ -1,22 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
+import React from 'react';
+import UserPage from '../../src/pages/UserPage/UserPage';
 
-const User = () => {
-    const [ user, setUser ] = useState(null); 
-    const router = useRouter();
-    const id = router.query.user;
-    useEffect(() => {
-        const load = async () => {
-            const response = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`)
-            const fetchedUser = await response.json();
-            console.log(fetchedUser)
-            setUser(fetchedUser);
-        }
-        load();
-    }, [id])
+const UserContainer = () => {
+    
     return (
-        <>{`Helloooo ${user && user.name}`}</>
+        <UserPage/>
     )
 }
 
-export default User;
+export default UserContainer;
