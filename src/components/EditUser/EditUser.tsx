@@ -1,18 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FormControl, FormLabel } from "@chakra-ui/form-control";
 import { Input } from "@chakra-ui/input";
 import { Button } from "@chakra-ui/button";
 import { Person } from "../../../api/Person";
 import { validateEmail } from "../../../shared/utilities";
-import { ERROR, ERROR_EMAIL, SUCCESS, ERROR_CREATE } from "../../../shared/constants";
+import { ERROR_UPDATE_EMPTY, ERROR_UPDATE_EMAIL, SUCCESS_EDIT, ERROR_UPDATE } from "../../../shared/constants";
 import { useToast } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { UserService } from "../../../services/userService";
 
-const CreateUser = () => {
+const EditUser = () => {
   const [user, setUser] = useState({} as Person);
   const toast = useToast();
   const router = useRouter();
+  const { slug } = router.query;
+  const id = slug?.[0];
+
+  useEffect(()=> {
+    const auth =  localStorage.getItem("email");
+    if (!auth) {
+      router.push("/login");
+    }
+  }, []);
 
   const setValues = (data: string, name: string) => {
     setUser({ ...user, [name]: data });
@@ -22,20 +31,20 @@ const CreateUser = () => {
     const valid = validateEmail(data.email);
 
     if (!data.name) {
-      toast(ERROR as {});
+      toast(ERROR_UPDATE_EMPTY as {});
       return;
     }
     if (!valid) {
-      toast(ERROR_EMAIL as {});
+      toast(ERROR_UPDATE_EMAIL as {});
       return;
     } else {
-      UserService.createUser(user).then((response) => {
-        if (response.status === 201) {
-          toast(SUCCESS as {});
-          router.push("/users");
+      UserService.editUser(user, id).then(response => {
+        if(response.status === 200){
+            toast(SUCCESS_EDIT as {});
+            router.push("/users");
         }else{
-          toast(ERROR_CREATE as {});
-        }
+            toast(ERROR_UPDATE as {});
+          }
       });
     }
   };
@@ -61,10 +70,10 @@ const CreateUser = () => {
         />
       </FormControl>
       <Button marginTop="15px" onClick={() => submit(user)}>
-        Create
+        Save
       </Button>
     </>
   );
 };
 
-export default CreateUser;
+export default EditUser;

@@ -5,35 +5,36 @@ import { Table, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/table";
 import { Container } from "@chakra-ui/layout";
 import { Button } from "@chakra-ui/button";
 import { useToast } from "@chakra-ui/react";
-import { successDelete } from "../../../shared/utilities";
+import { SUCCESS_DELETE } from "../../../shared/constants";
+import { UserService } from "../../../services/userService";
 
 const User = () => {
   const [user, setUser] = useState({} as Person);
   const router = useRouter();
-  const id = router.query.user;
+  const { slug } = router.query;
+  const id = slug?.[0];
   const toast = useToast();
 
   const deleteUser = () => {
-    fetch(`https://jsonplaceholder.typicode.com/users/${id}`, {
-      method: 'DELETE',
-    })
+    UserService.deleteUser(id)
     .then(response => {
       if(response.status === 200){
-        toast(successDelete as {});
+        toast(SUCCESS_DELETE as {});
         router.push("/users");
       }
     })
   }
 
   useEffect(() => {
-    const auth = localStorage.getItem("email");
+    if(!id)return;
+
+    const auth =  localStorage.getItem("email");
     if (!auth) {
       router.push("/login");
     }
+    
     const load = async () => {
-      const response = await fetch(
-        `https://jsonplaceholder.typicode.com/users/${id}`
-      );
+      const response = await UserService.getUser(id);
       const fetchedUser = await response.json();
       setUser(fetchedUser);
     };
@@ -68,7 +69,7 @@ const User = () => {
           </Tr>
         </Tbody>
       </Table>
-      <Button margin="15px">Edit</Button>
+      <Button margin="15px" onClick={() => router.push(`/users/${id}/edit`)}>Edit</Button>
       <Button margin="15px" onClick={() => deleteUser()}>Delete</Button>
     </Container>
   );

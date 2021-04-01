@@ -4,7 +4,7 @@ import { Input } from "@chakra-ui/input";
 import { Button } from "@chakra-ui/react";
 import Router from "next/router";
 import { useToast } from "@chakra-ui/react";
-import { successLogin, success, errorLogin } from "../../../shared/utilities";
+import { SUCCESS_LOGIN, SUCCESS, ERROR_LOGIN } from "../../../shared/constants";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -13,13 +13,13 @@ const Login = () => {
   const login = (email: string) => {
     const storageEmail = localStorage.getItem("email");
     if (storageEmail === email) {
-      toast(successLogin as {});
+      toast(SUCCESS_LOGIN as {});
       Router.push("/");
     } else if (storageEmail && storageEmail !== email) {
-      toast(errorLogin as {});
+      toast(ERROR_LOGIN as {});
     } else {
       localStorage.setItem("email", email);
-      toast(success as {});
+      toast(SUCCESS as {});
       Router.push("/");
     }
   };
