@@ -1,7 +1,7 @@
-import React from "react";
+import React, { FC } from "react";
 import LoginPage from "../src/pages/LoginPage/LoginPage";
 
-const LoginContainer = () => {
+const LoginContainer: FC = () => {
   return <LoginPage />;
 };
 

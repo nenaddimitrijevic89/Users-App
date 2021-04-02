@@ -3,7 +3,7 @@ import Router from 'next/router';
 import { Center } from '@chakra-ui/layout';
 import { Spinner } from '@chakra-ui/spinner';
 
-const IndexContainer = () => {
+const IndexContainer: React.FC = () => {
   useEffect(() => {
     const { pathname } = Router;
     if(pathname == '/' ){

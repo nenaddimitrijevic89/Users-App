@@ -21,7 +21,7 @@ const Users = () => {
       {users?.map((user: Person) => {
         return (
           <Link as={`/users/${user.id}`} href="/users/[user]" key={user.id}>
-            <Tr cursor="pointer" _hover={{ background: '#50e3c2' }}>
+            <Tr cursor="pointer" _hover={{ background: '#50e3c2', color: "black" }}>
               <Td>{user.id}</Td>
               <Td>{user.name}</Td>
               <Td>{user.email}</Td>
