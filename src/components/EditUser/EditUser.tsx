@@ -65,7 +65,7 @@ const EditUser = () => {
         <Input
           type="text"
           name="name"
-          value={user?.name}
+          value={user?.name || ""}
           onChange={(e) => setValues(e.target.value, "name")}
           required
         />
@@ -75,7 +75,7 @@ const EditUser = () => {
         <Input
           type="email"
           name="email"
-          value={user?.email}
+          value={user?.email || ""}
           onChange={(e) => setValues(e.target.value, "email")}
           required
         />
