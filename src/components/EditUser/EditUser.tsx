@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { FormControl, FormLabel } from "@chakra-ui/form-control";
 import { Input } from "@chakra-ui/input";
 import { Button } from "@chakra-ui/button";
@@ -15,13 +15,6 @@ const EditUser = () => {
   const router = useRouter();
   const { slug } = router.query;
   const id = slug?.[0];
-
-  useEffect(()=> {
-    const auth =  localStorage.getItem("email");
-    if (!auth) {
-      router.push("/login");
-    }
-  }, []);
 
   const setValues = (data: string, name: string) => {
     setUser({ ...user, [name]: data });

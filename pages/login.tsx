@@ -1,5 +1,5 @@
 import React from "react";
-import LoginPage from "../src/pages/LoginPage/LoginPage.tsx";
+import LoginPage from "../src/pages/LoginPage/LoginPage";
 
 const LoginContainer = () => {
   return <LoginPage />;

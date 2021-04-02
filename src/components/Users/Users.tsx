@@ -10,7 +10,7 @@ const Users = () => {
   useEffect(() => {
     const load = async () => {
       const response = await UserService.getUsers();
-      const users = await response.json();
+      const users: Person[] = await response.json();
       setUsers(users);
     };
     load();
@@ -18,7 +18,7 @@ const Users = () => {
 
   return (
     <>
-      {users.map((user: Person) => {
+      {users?.map((user: Person) => {
         return (
           <Link as={`/users/${user.id}`} href="/users/[user]" key={user.id}>
             <Tr cursor="pointer" _hover={{ background: '#50e3c2' }}>

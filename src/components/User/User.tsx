@@ -27,11 +27,6 @@ const User = () => {
 
   useEffect(() => {
     if(!id)return;
-
-    const auth =  localStorage.getItem("email");
-    if (!auth) {
-      router.push("/login");
-    }
     
     const load = async () => {
       const response = await UserService.getUser(id);

@@ -1,21 +1,29 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Table, Tbody, Th, Thead, Tr } from "@chakra-ui/table";
 import Users from "../../components/Users/Users";
 import { useRouter } from "next/router";
-import { Container } from "@chakra-ui/layout";
+import { Center, Container } from "@chakra-ui/layout";
 import { Button } from "@chakra-ui/button";
+import { Spinner } from "@chakra-ui/react";
 
 const UsersPage = () => {
   const router = useRouter();
+  const [loader, setLoader] = useState(true);
 
   useEffect(() => {
     const auth = localStorage.getItem("email");
     if (!auth) {
       router.push("/login");
+    } else {
+      setLoader(false);
     }
   }, []);
 
-  return (
+  return loader ? (
+    <Center>
+      <Spinner size="xl" marginTop="50px" />
+    </Center>
+  ) : (
     <Container maxW="container.lg">
       <Table variant="simple">
         <Thead>
